@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_app/cn/xlunzi/flutter/native/native_call.dart';
 import 'package:flutter_app/cn/xlunzi/flutter/ui_util.dart';
 
 void main() {
@@ -113,15 +113,7 @@ class Page1 extends StatelessWidget {
             ),
             FloatingActionButton(
               onPressed: () async {
-                const platform = const MethodChannel('cn.xlunzi.flutter/native_method');
-                String signId;
-                try {
-                  signId = await platform.invokeMethod('get_sign_id');
-                } on PlatformException catch (e, s) {
-                  debugPrint("$e -- \n${s.toString()}");
-                } on MissingPluginException catch (e, s) {
-                  debugPrint("$e -- \n${s.toString()}");
-                }
+                String signId = await NativeCall().getSignId();
                 print('signId = $signId');
               },
             ),

@@ -1,5 +1,4 @@
 import 'package:flutter_app/cn/xlunzi/flutter/bean/banner_entity.dart';
-import 'package:flutter_app/cn/xlunzi/flutter/bean/base_entity.dart';
 
 bannerEntityFromJson(BannerEntity data, Map<String, dynamic> json) {
 	if (json['data'] != null) {

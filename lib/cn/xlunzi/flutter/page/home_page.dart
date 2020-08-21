@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       if (data != null) {
         _bannerEntity = BannerEntity().fromJson(data);
       }
-    } catch (e, s) {
+    } catch (e) {
       debugPrint(e);
     }
     if (_bannerEntity != null) {
@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         if (data != null) {
           _articleEntity = ArticleEntity().fromJson(data);
         }
-      } catch (e, s) {
+      } catch (e) {
         debugPrint(e);
       }
       if (_articleEntity != null) {
