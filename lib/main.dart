@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _initData() async {
     var sp = await SharedPreferences.getInstance();
     var key = "launch_times";
-    int value = sp.getInt(key);
+    int value = sp.getInt(key) ?? 0;
     if (_counter != value) {
       setState(() {
         _counter = value;
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     SharedPreferences.getInstance().then((sp) {
       var key = "launch_times";
-      int value = sp.getInt(key);
+      int value = sp.getInt(key) ?? 0;
       print('onPress.value = $value');
       setState(() {
         _counter = value;
