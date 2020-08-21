@@ -74,53 +74,64 @@ class Page1 extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 200),
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                RaisedButton(
+                  onPressed: () async {
+                    await _onNextPress(context);
+                  },
+                  child: Text('下一个'),
+                ),
+                RaisedButton(
+                  child: Text('pushNamed'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/page2');
+                  },
+                ),
+              ],
             ),
-            RaisedButton(
-              onPressed: () async {
-                var result = await Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration(milliseconds: 220),
-                    pageBuilder: (BuildContext context, Animation<double> animation,
-                        Animation<double> secondaryAnimation) {
-                      return FadeTransition(
-                        opacity: animation,
-                        child: SlideTransition(
-                          position: Tween<Offset>(
-                            begin: Offset(1.0, 0.0),
-                            end: Offset(0.0, 0.0),
-                          ).animate(animation),
-                          child: Page2(),
-                        ),
-                      );
-                    },
-                  ),
-                );
-                debugPrint('onBack $result');
-              },
-              child: Text('下一个'),
-            ),
-            RaisedButton(
-              child: Text('pushNamed'),
-              onPressed: () {
-                Navigator.pushNamed(context, '/page2');
-              },
-            ),
-            FloatingActionButton(
+          ),
+          Positioned(
+            bottom: 18.0,
+            right: 18.0,
+            child: FloatingActionButton(
+              child: Icon(Icons.add),
               onPressed: () async {
                 String signId = await NativeCall().getSignId();
                 print('signId = $signId');
               },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  Future _onNextPress(BuildContext context) async {
+    var result = await Navigator.push(
+      context,
+      PageRouteBuilder(
+        transitionDuration: Duration(milliseconds: 220),
+        pageBuilder: (BuildContext context, Animation<double> animation,
+            Animation<double> secondaryAnimation) {
+          return FadeTransition(
+            opacity: animation,
+            child: SlideTransition(
+              position: Tween<Offset>(
+                begin: Offset(1.0, 0.0),
+                end: Offset(0.0, 0.0),
+              ).animate(animation),
+              child: Page2(),
+            ),
+          );
+        },
+      ),
+    );
+    debugPrint('onBack $result');
   }
 }
 
