@@ -102,6 +102,11 @@ class Page1 extends StatelessWidget {
               child: Icon(Icons.add),
               onPressed: () async {
                 String signId = await NativeCall().getSignId();
+
+                if(!_navigatorKey.currentState.mounted) {
+                  return;
+                }
+
                 print('signId = $signId');
               },
             ),
