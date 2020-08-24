@@ -1,7 +1,5 @@
 class CountState {
-  final int _count;
+  final int count;
 
-  int get count => _count;
-
-  CountState([this._count = 0]);
+  CountState([this.count = 0]);
 }
